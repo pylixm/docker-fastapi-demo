@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fastapi Demo</title>
+</head>
+<body>
+{{ request }}
+
+<ul>
+  {% for blog in post_list %}
+<li>{{ blog.title }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
