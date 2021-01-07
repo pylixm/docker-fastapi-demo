@@ -20,7 +20,7 @@ def create_app():
 
     app.mount('/static', StaticFiles(directory='static'), name='static')
 
-    # 应用启动和关闭时，增加监听实践，用来创建和关闭数据库链接。
+    # 应用启动和关闭时，增加监听事件，用来创建和关闭数据库链接。
     app.add_event_handler("startup", create_start_app_handler())
     app.add_event_handler("shutdown", create_stop_app_handler())
 
@@ -35,5 +35,5 @@ app = create_app()
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app=app, host="127.0.0.1", port=8000, log_level="debug")
+    uvicorn.run(app=app, host="127.0.0.1", port=8001, log_level="debug")
     # gunicorn -b 127.0.0.1: 8001 -k uvicorn.workers.UvicornWorker main: api
