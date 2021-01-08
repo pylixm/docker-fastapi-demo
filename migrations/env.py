@@ -7,7 +7,6 @@ from sqlalchemy import pool
 from alembic import context
 
 sys.path = ['', '..'] + sys.path[1:]
-from service.models import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -26,12 +25,17 @@ fileConfig(config.config_file_name)
 # from myapp.mymodel1 import Model1Base
 # from myapp.mymodel2 import Model2Base
 # target_metadata = [Model1Base.metadata, Model2Base.metadata]
-target_metadata = Base.metadata
+from models.posts import PostsBase
+target_metadata = PostsBase.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+# 使用配置中的db URL, 而非写死
+from core.config import DATABASE_URL
+config.set_main_option("sqlalchemy.url", str(DATABASE_URL))
 
 
 def run_migrations_offline():

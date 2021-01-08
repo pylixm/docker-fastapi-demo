@@ -31,3 +31,10 @@ alembic upgrade head
 ```
 
 alembic 还支持数据库的回滚、历史版本的查看等操作。更多内容，可参考：https://alembic.sqlalchemy.org/en/latest/index.html。
+
+
+## 编译启动 
+
+docker build -t fastapi-mysql:v1.0 .
+
+docker run -p 80:80 -d -e DB_CONNECTION="mysql://root:Root1024@xxxx/fastapi" fastapi-mysql:v1.0 ./start.sh 

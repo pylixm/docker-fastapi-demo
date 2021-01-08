@@ -1,23 +1,25 @@
-FROM python:3.8.1-slim
+FROM python:3.9-slim-buster
 
+LABEL maintainer="DeanWu <pyli.xm@gmail.com>"
+
+# stdout 无缓冲，直接输出
 ENV PYTHONUNBUFFERED 1
 
-EXPOSE 8000
+COPY . /app
+
 WORKDIR /app
 
+RUN chmod +x start.sh prestart.sh start-reload.sh
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends netcat && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    apt-get install -y --no-install-recommends default-libmysqlclient-dev gcc libffi-dev make && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    pip install --no-cache-dir -r requirements.txt && \
+    rm -rf requirements.txt && \
+    pip install --no-cache-dir gunicorn
 
-COPY poetry.lock pyproject.toml ./
-RUN pip install poetry==1.0.* && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev
+ENV PYTHONPATH=/app
 
-COPY docker/entrypoint.sh docker/entrypoint.sh
+EXPOSE 80
 
-COPY . ./
-
-CMD alembic upgrade head && \
-    uvicorn --host=0.0.0.0 app.main:app
+#CMD ["sh", "start.sh"]
