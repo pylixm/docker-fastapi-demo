@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.requests import Request
 from core import templates
 from core.db import database
-from service.models import posts
+from models.posts import posts
 
 router = APIRouter()
 

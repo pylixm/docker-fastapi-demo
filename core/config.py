@@ -9,7 +9,7 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from core.logging import InterceptHandler
 
-VERSION = "0.0.0"
+VERSION = "0.0.1"
 API_PREFIX = "/api"
 
 # 默认先从环境变量取，若没有从.env 取，若还没有，则使用该处设置的默认值。
