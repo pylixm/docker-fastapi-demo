@@ -3,7 +3,7 @@ aiomysql==0.0.20
 alembic==1.4.2
 cffi==1.14.0
 click==7.1.2
-cryptography==2.9.2
+cryptography==3.2
 databases==0.3.2
 fastapi==0.58.1
 h11==0.9.0
