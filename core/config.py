@@ -21,6 +21,9 @@ DATABASE_URL: DatabaseURL = config("DB_CONNECTION", cast=DatabaseURL)
 MAX_CONNECTIONS_COUNT: int = config("MAX_CONNECTIONS_COUNT", cast=int, default=10)
 MIN_CONNECTIONS_COUNT: int = config("MIN_CONNECTIONS_COUNT", cast=int, default=10)
 
+SQLALCHEMY_DATABASE_URL: str = config("SQLALCHEMY_DATABASE_URL", default="")
+SQLALCHEMY_ASYNC_DATABASE_URL: str = config("SQLALCHEMY_ASYNC_DATABASE_URL", default="")
+
 SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
 
 PROJECT_NAME: str = config("PROJECT_NAME", default="FastAPI example application")

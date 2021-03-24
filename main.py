@@ -3,7 +3,8 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
 from core import config
-from core.events import create_start_app_handler, create_stop_app_handler
+# from core.events import create_start_app_handler, create_stop_app_handler
+from core.db import async_session
 from core.routes import page_routes, api_routes
 
 
@@ -21,8 +22,16 @@ def create_app():
     app.mount('/static', StaticFiles(directory='static'), name='static')
 
     # 应用启动和关闭时，增加监听事件，用来创建和关闭数据库链接。
-    app.add_event_handler("startup", create_start_app_handler())
-    app.add_event_handler("shutdown", create_stop_app_handler())
+    # app.add_event_handler("startup", create_start_app_handler())
+    # app.add_event_handler("shutdown", create_stop_app_handler())
+
+    @app.on_event("startup")
+    async def startup():
+        app.state.se = async_session()
+
+    @app.on_event("shutdown")
+    async def shutdown():
+        print('server shutdown {}'.format('-'*30))
 
     # 路由
     app.include_router(page_routes)
