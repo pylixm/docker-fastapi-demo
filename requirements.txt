@@ -8,7 +8,7 @@ databases==0.3.2
 fastapi==0.58.1
 h11==0.9.0
 httptools==0.1.1
-Jinja2==2.11.2
+Jinja2==2.11.3
 loguru==0.5.1
 Mako==1.1.3
 MarkupSafe==1.1.1
